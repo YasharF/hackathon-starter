@@ -1214,13 +1214,21 @@ Using a local instance on your laptop with ngrok is a good solution for your dem
 
 [AWS Free Tier](https://aws.amazon.com/free) provides 12 months of compute (EC2 Windows or Linux) for free.  AWS has up-to-date guides and instructions for setting up your host.
 
+#### Set up AWS Security Group
+[TODO]
 
----
-### Azure
+#### Set up and Deploy to EC2 Instance
+[TODO]
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Windows_Azure_logo.png" width="200">
 
-[Azure free services](https://azure.microsoft.com/en-in/pricing/free-services) provides 12 months VM (Windows or Linux) for free.
+
+#### AWS CodeDeploy
+[TODO]
+
+#### Elastic Beanstalks
+
+
+#### Docker Containers on Amazon ECS and AWS Fargate 
 
 
 ---
