@@ -192,18 +192,52 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 <hr>
 
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RecaptchaLogo.svg/200px-RecaptchaLogo.svg.png" width="200">
+<img src="https://i.imgur.com/jULUCKF.png" height="75">
 
-- Visit <a href="https://www.google.com/recaptcha/admin" target="_blank">Google reCAPTCHA Admin Console</a>
-- Enter your application's name as the **Label**
-- Choose **reCAPTCHA v2**, **"I'm not a robot" Checkbox**
-- Enter *localhost* as the domain.  You can have other domains added in addition to *localhost*
-- Accept the terms and submit the form
-- Copy the *Site Key* and the *Secret key* into `.env`.  These keys will be accessible under Settings, reCAPTCHA keys drop down if you need them again later
+- Visit <a href="https://developers.facebook.com/" target="_blank">Facebook Developers</a>
+- Click **My Apps**, then select **Add a New App* from the dropdown menu
+- Enter a new name for your app
+- Click on the **Create App ID** button
+- Find the Facebook Login Product and click on **Facebook Login**
+- Instead of going through their Quickstart, click on **Settings** for your app in the top left corner
+- Copy and paste *App ID* and *App Secret* keys into `.env`
+- **Note:** *App ID* is **FACEBOOK_ID**, *App Secret* is **FACEBOOK_SECRET** in `.env`
+- Enter `localhost` under *App Domains*
+- Choose a **Category** that best describes your app
+- Click on **+ Add Platform** and select **Website**
+- Enter your BASE_URL value (i.e. `http://localhost:8080`, etc) under *Site URL*
+- Click on the *Settings* tab in the left nav under Facebook Login
+- Enter your BASE_URL value followed by /auth/facebook/callback (i.e. `http://localhost:8080/auth/facebook/callback` ) under Valid OAuth redirect URIs
+
+**Note:** After a successful sign-in with Facebook, a user will be redirected back to the home page with appended hash `#_=_` in the URL. It is *not* a bug. See this [Stack Overflow](https://stackoverflow.com/questions/7131909/facebook-callback-appends-to-return-url) discussion for ways to handle it.
 
 <hr>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1000px-Google_2015_logo.svg.png" width="200">
+<img src="https://imgur.com/2P4UMvC.png" height="75">
+
+- Go to <a href="https://developer.foursquare.com" target="_blank">Foursquare for Developers</a> and log in
+- Click on **My Apps** in the top menu
+- Click the **Create A New App** button
+- Enter *App Name*, *Welcome page url*,
+- For **Redirect URI**: your BASE_URL value followed by /auth/foursquare/callback (i.e. `http://localhost:8080/auth/foursquare/callback` )
+- Click **Save Changes**
+- Copy and paste *Client ID* and *Client Secret* keys into `.env` file
+
+<hr>
+
+<img src="https://i.imgur.com/oUob1wG.png" height="75">
+
+- Go to <a href="https://github.com/settings/profile" target="_blank">Account Settings</a>
+- Select **Developer settings** from the sidebar
+- Then click on **OAuth Apps** and then on **Register new application**
+- Enter *Application Name* and *Homepage URL*. Enter your BASE_URL value (i.e. `http://localhost:8080`, etc) as the homepage URL.
+- For *Authorization Callback URL*: your BASE_URL value followed by /auth/github/callback (i.e. `http://localhost:8080/auth/github/callback` )
+- Click **Register application**
+- Now copy and paste *Client ID* and *Client Secret* keys into `.env` file
+
+<hr>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2f/Google_2015_logo.svg/1000px-Google_2015_logo.svg.png" height="50">
 
 - Visit <a href="https://cloud.google.com/console/project" target="_blank">Google Cloud Console</a>
 - Click on the **Create Project** button
@@ -225,55 +259,25 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 
 <hr>
 
-<img src="https://i.imgur.com/jULUCKF.png" width="90">
+<img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/HERE_logo.svg" height="75">
 
-- Visit <a href="https://developers.facebook.com/" target="_blank">Facebook Developers</a>
-- Click **My Apps**, then select **Add a New App* from the dropdown menu
-- Enter a new name for your app
-- Click on the **Create App ID** button
-- Find the Facebook Login Product and click on **Facebook Login**
-- Instead of going through their Quickstart, click on **Settings** for your app in the top left corner
-- Copy and paste *App ID* and *App Secret* keys into `.env`
-- **Note:** *App ID* is **FACEBOOK_ID**, *App Secret* is **FACEBOOK_SECRET** in `.env`
-- Enter `localhost` under *App Domains*
-- Choose a **Category** that best describes your app
-- Click on **+ Add Platform** and select **Website**
-- Enter your BASE_URL value (i.e. `http://localhost:8080`, etc) under *Site URL*
-- Click on the *Settings* tab in the left nav under Facebook Login
-- Enter your BASE_URL value followed by /auth/facebook/callback (i.e. `http://localhost:8080/auth/facebook/callback` ) under Valid OAuth redirect URIs
-
-**Note:** After a successful sign-in with Facebook, a user will be redirected back to the home page with appended hash `#_=_` in the URL. It is *not* a bug. See this [Stack Overflow](https://stackoverflow.com/questions/7131909/facebook-callback-appends-to-return-url) discussion for ways to handle it.
+- Go to <a href="https://developer.here.com" target="_blank">https://developer.here.com</a>
+- Sign up and create a Freemium project
+- Create JAVASCRIPT/REST credentials. Copy and paste the APP_ID and APP into `.env` file.
+- Note that these credentials are available on the client-side, and you need to create a domain whitelist for your app credentials when you are publicly launching the app.
 
 <hr>
 
-<img src="https://i.imgur.com/oUob1wG.png" width="90">
+<img src="https://i.imgur.com/Lw5Jb7A.png" height="50">
 
-- Go to <a href="https://github.com/settings/profile" target="_blank">Account Settings</a>
-- Select **Developer settings** from the sidebar
-- Then click on **OAuth Apps** and then on **Register new application**
-- Enter *Application Name* and *Homepage URL*. Enter your BASE_URL value (i.e. `http://localhost:8080`, etc) as the homepage URL.
-- For *Authorization Callback URL*: your BASE_URL value followed by /auth/github/callback (i.e. `http://localhost:8080/auth/github/callback` )
-- Click **Register application**
-- Now copy and paste *Client ID* and *Client Secret* keys into `.env` file
+- Go to <a href="https://developer.intuit.com/app/developer/qbo/docs/get-started" target="_blank">https://developer.intuit.com/app/developer/qbo/docs/get-started</a>
+- Use the Sign Up option in the upper right corner of the screen (navbar) to get a free developer account and a sandbox company.
+- Create a new app by going to your Dashboard using the My Apps option in the top nav bar or by going to <a href="https://developer.intuit.com/app/developer/myapps" target="_blank">https://developer.intuit.com/app/developer/myapps</a>
+- In your App, under Development, Keys & OAuth (right nav), find the Client ID and Client Secret for your `.env` file
 
 <hr>
 
-<img src="https://i.imgur.com/QMjwCk6.png" width="90">
-
-- Sign in at <a href="https://developer.x.com/" target="_blank">https://developer.x.com/</a>
-- Start with the Free tier
-- Click **Create a new application**
-- Enter your application name, website and description. Set the website as your BASE_URL value (i.e. `http://localhost:8080`, etc).
-- For **Callback URL**: your BASE_URL value followed by /auth/x/callback (i.e. `http://localhost:8080/auth/x/callback` )
-- Go to **Settings** tab
-- Under *Application Type* select **Read and Write** access
-- Check the box **Allow this application to be used to Sign in with X**
-- Click **Update this X's applications settings**
-- Copy and paste *Consumer Key* and *Consumer Secret* keys into `.env` file
-
-<hr>
-
-<img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Logo.svg.original.svg" width="200">
+<img src="https://content.linkedin.com/content/dam/me/business/en-us/amp/brand-site/v2/bg/LI-Logo.svg.original.svg" height="50">
 
 - Sign in at <a href="https://developer.linkedin.com/" target="_blank">LinkedIn Developer Network</a>
 - From the account name dropdown menu select **API Keys**
@@ -291,16 +295,16 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 
 <hr>
 
-<img src="https://stripe.com/img/about/logos/logos/black@2x.png" width="180">
+<img src="https://s3-us-west-2.amazonaws.com/public.lob.com/dashboard/navbar/lob-logo.svg" height="50">
 
-- <a href="https://stripe.com/" target="_blank">Sign up</a> or log into your <a href="https://manage.stripe.com" target="_blank">dashboard</a>
-- Click on your profile and click on Account Settings
-- Then click on **API Keys**
-- Copy the **Secret Key**. and add this into `.env` file
+- Visit <a href="https://dashboard.lob.com/register" target="_blank">Lob Dashboard</a>
+- Create an account
+- Once logged into the dashboard, go to Settings in the bottom left corner of the page. (If there is a bottom pop-up, you may need to close it to see the Settings option.)
+- Go to the API Keys tab and get your Secret API key for the Test Environment. No physical paper mail will be sent out if you use the Test key, but you can see the PDF of what would have been mailed from your app (with some limitations) through the dashboard. If you use the Live key, they will actually print a physical letter, put it in an envelope with postage, place it in a USPS mailbox, and bill you for it.
 
 <hr>
 
-<img src="https://imgur.com/VpWnjp1.png" width="150">
+<img src="https://imgur.com/VpWnjp1.png" height="75">
 
 - Visit <a href="https://developer.paypal.com" target="_blank">PayPal Developer</a>
 - Log in to your PayPal account
@@ -312,19 +316,37 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 
 <hr>
 
-<img src="https://imgur.com/2P4UMvC.png" width="200">
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/ad/RecaptchaLogo.svg/200px-RecaptchaLogo.svg.png" height="75">
 
-- Go to <a href="https://developer.foursquare.com" target="_blank">Foursquare for Developers</a> and log in
-- Click on **My Apps** in the top menu
-- Click the **Create A New App** button
-- Enter *App Name*, *Welcome page url*,
-- For **Redirect URI**: your BASE_URL value followed by /auth/foursquare/callback (i.e. `http://localhost:8080/auth/foursquare/callback` )
-- Click **Save Changes**
-- Copy and paste *Client ID* and *Client Secret* keys into `.env` file
+- Visit <a href="https://www.google.com/recaptcha/admin" target="_blank">Google reCAPTCHA Admin Console</a>
+- Enter your application's name as the **Label**
+- Choose **reCAPTCHA v2**, **"I'm not a robot" Checkbox**
+- Enter *localhost* as the domain.  You can have other domains added in addition to *localhost*
+- Accept the terms and submit the form
+- Copy the *Site Key* and the *Secret key* into `.env`.  These keys will be accessible under Settings, reCAPTCHA keys drop down if you need them again later
 
 <hr>
 
-<img src="https://i.imgur.com/gUngyyW.png" width="200">
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Steam_logo.svg" height="75">
+
+- Go to <a href="http://steamcommunity.com/dev/apikey" target="_blank">http://steamcommunity.com/dev/apikey</a>
+- Sign in with your existing Steam account
+- Enter your *Domain Name* based on your BASE_URL, then and click **Register**
+- Copy and paste *Key* into `.env` file
+
+<hr>
+
+<img src="https://stripe.com/img/about/logos/logos/black@2x.png" height="75">
+
+- <a href="https://stripe.com/" target="_blank">Sign up</a> or log into your <a href="https://manage.stripe.com" target="_blank">dashboard</a>
+- Click on your profile and click on Account Settings
+- Then click on **API Keys**
+- Copy the **Secret Key**. and add this into `.env` file
+
+<hr>
+
+
+<img src="https://i.imgur.com/gUngyyW.png" height="50">
 
 - Go to <a href="http://www.tumblr.com/oauth/apps" target="_blank">http://www.tumblr.com/oauth/apps</a>
 - Once signed in, click **+Register application**
@@ -335,15 +357,7 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 
 <hr>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Steam_logo.svg" width="200">
-
-- Go to <a href="http://steamcommunity.com/dev/apikey" target="_blank">http://steamcommunity.com/dev/apikey</a>
-- Sign in with your existing Steam account
-- Enter your *Domain Name* based on your BASE_URL, then and click **Register**
-- Copy and paste *Key* into `.env` file
-
-<hr>
-<img src="https://www.freepnglogos.com/uploads/twitch-logo-image-hd-31.png" height="90">
+<img src="https://www.freepnglogos.com/uploads/twitch-logo-image-hd-31.png" height="75">
 
 - Visit the <a href="https://dev.twitch.tv/dashboard/apps" target="_blank">Twitch developer dashboard</a>
 - If prompted, authorize the dashboard to access your twitch account
@@ -357,16 +371,7 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 
 <hr>
 
-<img src="https://upload.wikimedia.org/wikipedia/commons/c/c7/HERE_logo.svg" width="90">
-
-- Go to <a href="https://developer.here.com" target="_blank">https://developer.here.com</a>
-- Sign up and create a Freemium project
-- Create JAVASCRIPT/REST credentials. Copy and paste the APP_ID and APP into `.env` file.
-- Note that these credentials are available on the client-side, and you need to create a domain whitelist for your app credentials when you are publicly launching the app.
-
-<hr>
-
-<img src="https://s3.amazonaws.com/ahoy-assets.twilio.com/global/images/wordmark.svg" width="200">
+<img src="https://s3.amazonaws.com/ahoy-assets.twilio.com/global/images/wordmark.svg" height="75">
 
 - Go to <a href="https://www.twilio.com/try-twilio" target="_blank">https://www.twilio.com/try-twilio</a>
 - Sign up for an account.
@@ -375,12 +380,18 @@ Obtain SMTP credentials from a provider for transactional emails.  Set the SMTP_
 
 <hr>
 
-<img src="https://i.imgur.com/Lw5Jb7A.png" width="200">
+<img src="https://i.imgur.com/QMjwCk6.png" height="50">
 
-- Go to <a href="https://developer.intuit.com/app/developer/qbo/docs/get-started" target="_blank">https://developer.intuit.com/app/developer/qbo/docs/get-started</a>
-- Use the Sign Up option in the upper right corner of the screen (navbar) to get a free developer account and a sandbox company.
-- Create a new app by going to your Dashboard using the My Apps option in the top nav bar or by going to <a href="https://developer.intuit.com/app/developer/myapps" target="_blank">https://developer.intuit.com/app/developer/myapps</a>
-- In your App, under Development, Keys & OAuth (right nav), find the Client ID and Client Secret for your `.env` file
+- Sign in at <a href="https://developer.x.com/" target="_blank">https://developer.x.com/</a>
+- Start with the Free tier
+- Click **Create a new application**
+- Enter your application name, website and description. Set the website as your BASE_URL value (i.e. `http://localhost:8080`, etc).
+- For **Callback URL**: your BASE_URL value followed by /auth/x/callback (i.e. `http://localhost:8080/auth/x/callback` )
+- Go to **Settings** tab
+- Under *Application Type* select **Read and Write** access
+- Check the box **Allow this application to be used to Sign in with X**
+- Click **Update this X's applications settings**
+- Copy and paste *Consumer Key* and *Consumer Secret* keys into `.env` file
 
 <hr>
 
