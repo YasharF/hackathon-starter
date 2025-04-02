@@ -60,6 +60,7 @@ Table of Contents
     - [JavaScript Date](#-javascript-date-cheatsheet)
     - [Mongoose Cheatsheet](#mongoose-cheatsheet)
 - [Deployment](#deployment)
+    - [AWS](#AWS)
 - [Docker](#docker)
 - [Production](#production)
 - [Changelog](#changelog)
@@ -1205,7 +1206,7 @@ To view the app, find your docker IP address + port 8080 ( this will typically b
 Deployment
 ----------
 
-Using a local instance on your laptop with ngrok is a good solution for your demo during the hackathon, and you wouldn't necessorily need to deploy to a cloud platform.  If we wish to have your app run 24x7 for general audiance, once you are ready to deploy your app, you will need to create an account with a cloud platform to host it. These are not the only choices, but they we have seen experince using them.  Additionally, you can create an account with **MongoDB Atlas** and then pick one of the providers below. Again, there are plenty of other choices, and you are not limited to just the ones listed below.
+Using a local instance on your laptop with ngrok is a good solution for your demo during the hackathon, and you wouldn't necessorily need to deploy to a cloud platform.  If we wish to have your app run 24x7 for general audiance, once you are ready to deploy your app, you will need to create an account with a cloud platform to host it.  There are a number of cloud service providers out there that you can research.  Service providers like AWS provide a free tier of service which can help you get started with just some minor costs (such as traffic overage if any, etc).
 
 ---
 ### AWS
@@ -1214,28 +1215,27 @@ Using a local instance on your laptop with ngrok is a good solution for your dem
 
 [AWS Free Tier](https://aws.amazon.com/free) provides 12 months of compute (EC2 Windows or Linux) for free.  AWS has up-to-date guides and instructions for setting up your host.
 
-#### Set up AWS Security Group
-[TODO]
-
-#### Set up and Deploy to EC2 Instance
-[TODO]
-
-
-
-#### AWS CodeDeploy
-[TODO]
-
-#### Elastic Beanstalks
-
-
-#### Docker Containers on Amazon ECS and AWS Fargate 
+| Service | Setup |
+|---------|-------------|
+| <img src="https://icon.icepanel.io/AWS/svg/Compute/EC2.svg" width="50"><br>**EC2 Instance** | EC2 is the compute server to host your application. You can run your application on your EC2 instance similar to how your run applications on your computer.<br><br>**Setup Steps:**<br>1. Create an AWS account and/or login to AWS console<br>2. In the search bar search for "EC2", and then pick EC2 from the services<br>3. Click on Launch an instance<br>4. Pick an OS image and Instance type. You can go with a free-tier one to try EC2 before upgrading to an instance that matches your traffic and application requiremnts<br>5. Under the Network settings, Create a security group, but remove checkboxes from Allow SSH, HTTPS, and HTTP. You will expose the proper ports later<br>6. You can go with the defaults for the remaining setting as long as they match with the free-tier if that is what you are choosing to use<br>7. Launch the instance, and wait for it to be provisioned |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/Virtual-Private-Cloud.svg" width="50"><br>**VPC / Security Group** | A security group controls the traffic that is allowed to reach and leave the resources that it is associated with. <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Developer-Tools/CodeDeploy.svg" width="50"><br>**CodeDeploy** | AWS CodeDeploy is a deployment service that automates application deployments to various compute platforms such as Amazon EC2 instances, on-premises instances, serverless AWS Lambda functions, and Amazon ECS services.  You can use it to have your instance auto-update from your git repo like github, bitbucket, etc.  Note that using the CodeDeploy service would require S3 storage usage as well. <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Compute/App-Runner.svg" width="50"><br>**App Runner** | If your application is stable and you expect surges of traffic, you can move from direct EC2 deployment to AWS App Runner which can scale the number of hosts that the application runs on up and down depending on the traffic to your host. <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Compute/Elastic-Beanstalk.svg" width="50"><br>**Elastic Beanstalk** | You can use an Elastic Beanstalk deployment instead of an EC2 deployment of your application. When using Elastic Beanstalk deployments you are just provided with a code execution environemnt and you are no longer required to maintain the OS for the server (i.e. Windows or Linux security patching, etc.)  <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Containers/Elastic-Container-Service.svg" width="50"><br>**Elastic Container Service** | ECS is the fully managed AWS container service that enables you to run docker containers on EC2 instances. <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Compute/Fargate.svg" width="50"><br>**Fargate** | Fargate takes your container deployment to the next level by moving you to a serverlsss setup for running containers. <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Compute/Bottlerocket.svg" width="50"><br>**Bedrock** | Bedrock provides serverless access to use Foundational LLM models such as Llama, Amazon Titan, Amazon Nova, etc.  <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="50"><br>**CloudFront** | You can use AWS CloudFront as the edge service that fronts client requests.  CloudFront can cache static content to reduce resource usage and speed up data delivery. It can also serve as an extra later of security because your application server isn't directly exposed to the internet trafic. <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Security-Identity-Compliance/WAF.svg" width="50"><br>**WAF** | with AWS WAF (Web Application Firewall), you can create security rules that control bot traffic and some of the common hack attempts before they get to your application.  <br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
+| <img src="https://icon.icepanel.io/AWS/svg/Networking-Content-Delivery/CloudFront.svg" width="50"><br>**Simple Email Service** | You can use AWS SES just like an SMTP server. Don't try to setup an email server on your EC2 instance to send out email, use SES.  Note that SES stricktly enforces anti-spam rules, so don't send anything that a recipent may mark as spam as it will get reported back to AWS.  If **1%** of your emails get reported as spam by recipients AWS will suspend your SES service.  Also you should setup mail setting such as spf, DMARC and DKIM so others can't spoof your email address causing your domain to get tagged as a spam domain, since it may cause automated spam marking of your emails by email service providers such as gmail, yahoo, etc.<br><br>**Setup Steps:**<br>1. ---.<br>2. ---.<br>3. ---.<br>4. ---.<br> |
 
 
 ---
-### Hosted MongoDB Atlas
+### Hosted MongoDB Atlas (can be on AWS)
 
 <img src="https://www.mongodb.com/assets/images/global/MongoDB_Logo_Dark.svg" width="200">
 
+ You can create an account with **MongoDB Atlas** and then pick one of the providers below which could be AWS for the deployment.
 - Go to [https://www.mongodb.com/](https://www.mongodb.com/)
 - Click the green **Try free** button
 - Fill in your information then hit **Create your Atlas account**
