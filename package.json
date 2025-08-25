@@ -50,7 +50,7 @@
     "express-rate-limit": "^8.0.1",
     "express-session": "^1.18.2",
     "jquery": "^3.7.1",
-    "langchain": "0.2.10",
+    "langchain": "0.3.31",
     "lastfm": "^0.9.4",
     "lusca": "^1.7.0",
     "mailchecker": "^6.0.17",
