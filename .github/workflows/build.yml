@@ -39,6 +39,31 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+      - name: Rename patch-package files to match updated versions
+        shell: bash
+        run: |
+          get_version() {
+            jq -r ".dependencies[\"$1\"] // .devDependencies[\"$1\"]" package.json
+          }
+
+          for PATCH in patches/*.patch; do
+            BASE=$(basename "$PATCH" .patch)
+
+            # Convert patch filename back to package name
+            PACKAGE=$(echo "$BASE" | sed 's|+|/|g')
+
+            VERSION=$(get_version "$PACKAGE")
+            if [ "$VERSION" == "null" ]; then
+              echo "Skipping $PACKAGE — not found in package.json"
+              continue
+            fi
+
+            NEW_NAME=$(echo "$PACKAGE" | sed 's|/|+|g')"+${VERSION}.patch"
+            if [ "$BASE.patch" != "$NEW_NAME" ]; then
+              echo "Renaming $BASE.patch -> $NEW_NAME"
+              git mv "$PATCH" "patches/$NEW_NAME"
+            fi
+          done
       - name: Automerge Dependabot PRs if all checks have passed
         shell: bash
         env:
