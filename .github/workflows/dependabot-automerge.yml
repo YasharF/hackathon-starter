@@ -1,0 +1,67 @@
+name: Dependabot Automerge
+
+on:
+  workflow_run:
+    workflows: ['Node.js CI']
+    types: [completed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  dependabot-automerge:
+    # if: >
+    #  github.event.workflow_run.conclusion == 'success' &&
+    #  github.event.workflow_run.event == 'pull_request' &&
+    #  contains(toJson(github.event.workflow_run.pull_requests), 'dependabot[bot]') &&
+    #  contains(toJson(github.event.workflow_run.pull_requests), 'master')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Automerge Dependabot PRs if all checks have passed
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PRS_JSON: ${{ toJson(github.event.workflow_run.pull_requests) }}
+          REPO: ${{ github.repository }}
+        run: |
+          PR_NUM=$(jq -r '.[0].number' <<<"$PRS_JSON")
+          echo "Attempting to merge PR #${PR_NUM} in ${REPO}"
+          gh pr merge "$PR_NUM" --squash --auto
+
+  dependabot-automerge-debug:
+    # Debug job: always run to capture the workflow_run payload for troubleshooting
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      - name: Dump workflow_run payload (safe)
+        # Use toJson to capture the workflow_run and pull_requests; do not print secrets.
+        env:
+          WF_JSON: ${{ toJson(github.event.workflow_run) }}
+          PRS_JSON: ${{ toJson(github.event.workflow_run.pull_requests) }}
+          EVENT: ${{ github.event.workflow_run.event }}
+          CONCLUSION: ${{ github.event.workflow_run.conclusion }}
+        run: |
+          echo "--- workflow_run.event ---"
+          echo "${EVENT}"
+          echo "--- workflow_run.conclusion ---"
+          echo "${CONCLUSION}"
+          echo "--- pull_requests (raw JSON) ---"
+          echo "${PRS_JSON}"
+          # Use jq (available on Ubuntu runners) to inspect array length and first item safely
+          PR_COUNT=$(jq -r 'length' <<<"${PRS_JSON}") || PR_COUNT=0
+          echo "PR count: ${PR_COUNT}"
+          if [ "${PR_COUNT}" -gt 0 ]; then
+            echo "PR[0].number: $(jq -r '.[0].number' <<<"${PRS_JSON}")"
+            echo "PR[0].user.login: $(jq -r '.[0].user.login' <<<"${PRS_JSON}")"
+            echo "PR[0].base.ref: $(jq -r '.[0].base.ref' <<<"${PRS_JSON}")"
+          else
+            echo "No pull_requests present in workflow_run payload"
+          fi
