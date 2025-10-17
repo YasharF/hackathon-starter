@@ -14,8 +14,7 @@ jobs:
     if: >
       github.event.workflow_run.conclusion == 'success' &&
       github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.pull_requests[0].user.login == 'YasharF'
-    # github.event.workflow_run.pull_requests[0].user.login == 'dependabot[bot]'
+      github.event.workflow_run.actor.login == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -32,7 +31,7 @@ jobs:
         run: |
           PR_NUM=$(jq -r '.[0].number' <<<"$PRS_JSON")
           echo "Attempting to merge PR #${PR_NUM} in ${REPO}"
-          gh pr merge "$PR_NUM" --squash --auto
+          gh pr merge "$PR_NUM" --squash --admin
 
   Sync-patches-after-dependabot-automerge:
     needs: [dependabot-automerge]
