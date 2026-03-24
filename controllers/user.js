@@ -970,9 +970,14 @@ exports.getTotpSetup = async (req, res, next) => {
       secret,
     });
     req.session.totpSecret = secret.base32;
+    // Generate QR image (SVG) data URI using the `qr` package
+    const qrModule = await import('qr');
+    const encodeQR = qrModule.default || qrModule;
+    const svg = encodeQR(totp.toString(), 'svg');
+    const qrImage = `data:image/svg+xml;utf8,${encodeURIComponent(svg)}`;
     res.render('account/totp-setup', {
       title: 'Setup Authenticator',
-      qrCode: totp.toString(),
+      qrImage,
       secret: secret.base32,
     });
   } catch (err) {
