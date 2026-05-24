@@ -3,6 +3,7 @@ name: Node.js 26 Preview CI
 on:
   pull_request:
     branches: ['master']
+  workflow_dispatch:
 
 permissions:
   contents: read
